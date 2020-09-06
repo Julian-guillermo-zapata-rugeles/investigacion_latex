@@ -83,7 +83,7 @@ Se caracteriza por tener bloques de datos llamados registros, dichos registros s
 
 \subsection{Memoria de acceso asociativo}
 Este tipo de memoria conserva algunas características del tipo aleatorio. Además es capaz de hacer comparaciones de bits parciales teniendo parte del contenido a buscar en memoria, es por tanto una recuperación basada en porciones. Al igual que la memoria aleatoria tiene su mecanismo de direccionamiento y su tiempo de recuperación es constante.
-Un ejemplo de ella es la\textbf{memoria caché}
+Un ejemplo de ella es la \textbf{memoria caché}
 
 \subsection{La memoria caché}
     \begin{figure}[h]
@@ -98,8 +98,20 @@ La memoria caché se clasifica Desde L1 (teniendo un coste/bit alto) y descendie
  para así disminuir la latencia que se experimenta al traer las instrucciones al procesador. Las instrucciones más usadas se almacenará en caché L1 y así hasta descender caché L3.
 (su tamaño comúnmente se clasifica en Megabytes)
 
-\section{Gestión de la memoria}
 
+\subsection{Read only memory (ROM)}
+Se caracteriza por ser un memoria \textbf
+{no volátil} por lo que sus datos son almacenados de manera permanente. Una ventaja significativa es que no requiere fuente de alimentación para memorizar los datos, su lectura es posible sin embargo no se puede escribir datos nuevos en ella. Suele usarse para cargar las primeras instrucciones de la máquina cuando se inicia para enterarla sobre la existencia de otros componentes.
+
+
+\subsection{Dynamic Random Acces Memory (DRAM)}
+La memoria de acceso aleatorio dinámica pertenece a la tecnología de memorias \textbf{RAM}. Conserva su características y consta de celdas que agrupa condensadores para representar de manera binaria los estados de sus condensadores (0 - 1). Naturalmente los condensadores presentan una tendencia a descargarse por lo que se deben recargar constantemente, de ahí que sea dinámica.
+
+\subsection{Static Random Acces Memory (SRAM)}
+La memoria de acceso aleatorio \textbf
+{estático} al igual que las DRAM pertenecen a la tecnología \textbf
+{RAM}, sin embargo su estructura de celdas no se basa en condensadores sino en transistores unidos entre sí(parecido al procesador) para formar una configuración cruzada y generar estados lógicos estables. La velocidad de este tipo de memorias es más rápida que la DRAM (aunque ambas necesitan refrescos periódicos al ser volátiles), al poseer un mecanismo más complejo requiere más espacio físico y por lo tanto su capacidad se ve reducida frente a su otra variante DRAM que consta de un circuito más sencillo y por lo tanto se pueden añadir más elementos en una placa
+(estas memorias suelen usarse como caché al ser más costosa y las DRAM como memoria principal al ser más baratas y poseer mayor capacidad) es frecuente encontrar que la memoria principal que usan los computadores sea dinámica y no estática.
 
 \section{Comparativa entre memorias}
  esta es la comparativa de las memorias
