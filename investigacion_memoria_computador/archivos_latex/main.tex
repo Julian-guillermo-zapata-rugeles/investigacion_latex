@@ -37,13 +37,13 @@
 
 \tableofcontents
 
-\section{Qué es la memoria de un computador}
+\section{¿ Qué es la memoria de un computador ?}
 Para conocer qué es la memoria de un computador debemos preguntarnos cómo funciona, un ejemplo práctico es imaginarnos un pequeño recipiente que es capaz de almacenar una carga eléctrica por un breve periodo de tiempo. El comportamiento físico de nuestro 'recipiente' que en electrónica se llama condensador(pues es capaz de almacenar energía sustentando un campo eléctrico) nos permite representar dos estados. Cuando nuestro recipiente está lleno (un nivel máximo de electrones) y cuando está vacío (ausencia de un mínimo de electrones), sin embargo esto no es suficiente para darnos una idea clara de como funciona la memoria.
 Para entender este nuevo concepto es necesario bajar en las capas de abstracción para imaginar que nuestros recipientes pueden agruparse en bloques, supongamos unos 8 recipientes por bloque (a este bloque lo llamaremos byte) y estos pueden tener algún estado de los expuestos anteriormente. Eso significa que podemos tener 2 posibles estados elevado a la octava potencia (pues tenemos 8 recipientes).
 
 
 \begin{figure}[h]
-\includegraphics[width=4cm]{images/byte.png}
+\includegraphics[width=3cm]{images/byte.png}
 \centering
 \caption{8 bits (8 recipientes)  agrupados en un bloque llamado byte. fuente imagen https://terminosaudiovisuales.es/byte/}
 \label{fig:byte}
@@ -59,7 +59,6 @@ más próxima al procesador y el coste/bit aumenta significativamente. A medida 
 
 \section{Tipos de memoria}
 
-
 La memoria de la computadora se caracteriza por tener múltiples prestaciones, cada una de ella tiene diferente clasificaciones / costes y funciones. Podemos sintetizar algunas de ellas en los principales grupos a continuación.\newline 
 
 \subsection{Memoria de acceso secuencial}
@@ -68,12 +67,12 @@ Se caracteriza por tener bloques de datos llamados registros, dichos registros s
     \begin{figure}[h]
     \includegraphics[width=6cm]{images/secuencial.png}
     \centering
-    \label{fig:aleatory}
+    \label{fig:noaleatory}
     \caption{Acceso secuencial}
     \end{figure}
 
 \subsection{Memoria de acceso aleatorio} Cada posición de memoria está organizada de tal manera que posee un único mecanismos físico de acceso, por lo que a diferencia del secuencial podemos acceder a registros de forma independiente. Esto permite eliminar el tiempo variable y acceder con el mismo coste cualquier registro independiente de su posición.
- \label{aleatory}
+
     \begin{figure}[h]
     \includegraphics[width=6cm]{images/aleatorio.png}
     \centering
@@ -89,13 +88,13 @@ Un ejemplo de ella es la \textbf{memoria caché}
     \begin{figure}[h]
     \includegraphics[width=6cm]{images/cache.jpg}
     \centering
-    \label{fig:aleatory}
+    \label{fig:cache}
     \caption{Memoria caché L1 , L2 , L3}
     \end{figure}
 
 La memoria caché se clasifica Desde L1 (teniendo un coste/bit alto) y descendiendo hasta L3 (coste/bit menor). Esta memoria está espacialmente más cerca del procesador y además presenta mayor velocidad de acceso que la memoria tipo RAM. Su función es facilitar el acceso de instrucciones 
  periódicas 
- para así disminuir la latencia que se experimenta al traer las instrucciones al procesador. Las instrucciones más usadas se almacenará en caché L1 y así hasta descender caché L3.
+ para así disminuir la latencia que se experimenta al traer las instrucciones al procesador. Las instrucciones más usadas se almacenará en caché L1 y así hasta descender a caché L3.
 (su tamaño comúnmente se clasifica en Megabytes)
 
 
@@ -113,16 +112,51 @@ La memoria de acceso aleatorio \textbf
 {RAM}, sin embargo su estructura de celdas no se basa en condensadores sino en transistores unidos entre sí(parecido al procesador) para formar una configuración cruzada y generar estados lógicos estables. La velocidad de este tipo de memorias es más rápida que la DRAM (aunque ambas necesitan refrescos periódicos al ser volátiles), al poseer un mecanismo más complejo requiere más espacio físico y por lo tanto su capacidad se ve reducida frente a su otra variante DRAM que consta de un circuito más sencillo y por lo tanto se pueden añadir más elementos en una placa
 (estas memorias suelen usarse como caché al ser más costosa y las DRAM como memoria principal al ser más baratas y poseer mayor capacidad) es frecuente encontrar que la memoria principal que usan los computadores sea dinámica y no estática.
 
-\section{Comparativa entre memorias}
- esta es la comparativa de las memorias
+\subsection{Memoria de disco magnetico}
+Este tipo de memoria \textbf{no volátil} tiene su principal uso en el almacenamiento persistente. A diferencia de la memoria ROM la cinta magnetica permite escribir nuevamente los sectores y puede conservar su estado incluso cuando no tiene alimentación eléctrica. Algunas memorias de tipo magnetico son :
 
-\section{Conclusión} 
-conclusión del documento
+\begin{itemize}
+    \item {Discos duros }
+    \item {Memoria usb}
+    \item {CD's}
+\end{itemize}
 
+Actualmente memorias como los discos duros se emplean para proveer almacenamiento permanente a las computadoras. Existen diversas limitantes para las memorias magneticas como la cantidad de revoluciones por minuto en discos duros tradicionales o la cantidad de veces que se puede sobreescribir los discos de estado sólido.
+una caracteristica sobresaliente de este tipo de memoria es su alta capacidad de almacenamiento muy por encima de las tipo RAM.
 
+\section{¿ Cómo se gestiona la memoria del computador ?}
 
+La memoria está gestionada por el Centro de Control de Memoria (MCH
+) cuya función principal es la de asignar el recurso de memoria además 
+de liberar la memoria que no será usada por un proceso. También está encargado de gestionar los intercambios entre la memoria y el disco rígido.
+Es importante aclarar que la gestión de memoria es tema de gran interés pues su optimización puede aumentar la eficiencia de la máquina.
+
+\subsection{Unidad manejo de memoria (MMU)}
+Cuando un programa legítimo quiere acceder a la memoria, la MMU
+ se encarga de traducir la dirección virtual que maneja el kernel
+ en una dirección física. Esta operación será comprobada para evitar el acceso de programas no autorizados a ella, de ser así se enviará una excepción al kernel
+. Para llevar a cabo esto y evitar que se corrompa el sistema operativo o su ejecución, se almacena el límite de la instrucción más alta del S.O en los registros de la cpu. Cuando una operación intente acceder a dicho espacio será interceptada.
+
+\subsection{Translation  Lookaside  Buffer}
+Dentro de la MMU
+ existe una memoria asociativa (muy similar a la caché
+) cuyo objetivo es guardar datos que fueron accedidos recientemente. Cuando el procesador requiere la instrucción el TLB
+ busca si tiene en su memoria dicho contenido,s ino emitirá un fallo y se procederá a buscar en la memoria.
+\section{¿Qué hace que una memoria sea más rápida que otra? ¿Por qué esto es importante?} 
+
+Cuando nos preguntamos la razón de que algunas memorias presenten mayor velocidad de transferencia es necesario aclarar algunos conceptos.Las memorias que integran tecnología basada en transistores (caché - sram
+) poseé velocidades mayores precisamente por las características físicas de sus componentes en relación a la memoria común de condensadores. También influyen otros componentes encargados de la comunicación de esta misma, el \textbf
+{BUS} (los circuitos que sirven de autopistas) entre la memoria y los microcontroladores pueden presentar cuellos de botella. Existe un problema conocido como latencia (tiempo de respuesta) que puede producir diferencias notorias entre las tecnologías de memoria.
+La limitante física también está presente en los discos rígidos por ejemplo, estos deben alcanzar un numero determinado de revoluciones/minutos para acceder a la información y no generar retrasos considerables en la ejecución de algún programa.
+
+Tener como prioridad conocer el funcionamiento del tipo de memorias existentes nos brinda la posibilidad de interactuar con ellas. Permite emplearlas de manera precisa en 
+múltiples aplicaciones, conocerlas nos da la posibilidad de explorar sus limitantes y cómo estas pueden ayudarnos a resolver problemas específicos.
+Entender el hardware nos ayuda a crear algoritmos óptimos que aprovechen los recursos existentes y comprender su rol en las máquinas modernas.
+Nuestra sociedad cada vez genera más información, nuestras ambiciones necesitan más capacidad. Quizá en unos cuantos años las memorias que citamos acá solo serán parte de la historia. Para embarcarnos en ese viaje es necesario empezar aquí, conociéndo su funcionamiento ahora.
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 \cite{rebollo}
 \cite{figura1}
+\cite{ucm}
+
 \end{document}
